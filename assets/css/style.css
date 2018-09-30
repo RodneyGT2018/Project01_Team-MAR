@@ -1,39 +1,15 @@
-.jumbotron {
-    color: #fff;
-    background-position-y: 10%;
-    color: #fff;
-    background-color: #000 !important;
-}
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
 
-div.panel-body {
-    background-color: white;
-    color:  black;
-    
+.icon-block {
+  padding: 0 15px;
+  border: 1px solid green;
 }
-
-.btn-primary {
-    background-color: #0c55f1;
-    border-color: #fff;
-    font-weight: bold;
+.icon-block .material-icons {
+	font-size: inherit;
 }
-
-.train-bkgrd {
-	background-repeat: no-repeat;
-	background-image: url(../images/database.jpg);
-	 background-size: 100% 159%;
-}
-
-.row{
-    margin-top:40px;
-    padding: 0 10px;
-}
-
-.clickable{
-    cursor: pointer;   
-}
-
-.panel-heading span {
-	margin-top: -20px;
-	font-size: 15px;
-}
-
