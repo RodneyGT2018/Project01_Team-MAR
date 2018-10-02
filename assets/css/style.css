@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .jumbotron {
     color: #fff;
     background-position-y: 10%;
@@ -41,3 +42,20 @@ div.panel-body {
     font-size: 25px;
     color: red;
 }
+=======
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+  border: 1px solid green;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+>>>>>>> 7062931c89cd90973a5056eceeb601c0f2f013ae
