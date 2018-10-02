@@ -1,103 +1,155 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title></title>
 
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Event Template </title>
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
-<!-- Link to JS file -->
-<script src="assets/javascript/app.js"></script>
+    <!-- Ajax Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      
 
- <link rel="stylesheet" href="assets/css/style.css">
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  </head>
 
- <!-- Ajax Link -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
- 
-
-</head>
-  <body>
-    <!-- Jumbotron Title -->
-      <div class="jumbotron train-bkgrd">
-        <h1 class="text-center"></h1>
-      </div>
-  <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Add Employee</h3>
-            </div>
-            <div class="panel-body">
-      <!-- Table -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th>Role</th>
-            <th>Start Date</th>
-            <th>Months Worked</th>
-            <th>Monthly Rate</th>
-            <th>Total Billed</th>
-          </tr>
-        </thead>
-        <tbody id="all-display">
-        </tbody>
-      </table>
+<body>
+  <!-- Zone 1  -->
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Zone 1</a></li>
+        <ul id="nav-mobile" class="sidenav"></ul>
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
-  </div>
-
-      <!-- Add Train Form -->
-      <div class="container">
+  </nav>
+  <!--   Body Section   -->
+  <div class="container">
+  <!-- Zone 2  -->
+    <div class="section">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Add Employee</h3>
-            </div>
-            <div class="panel-body">
-              <form>
-                <div class="form-group">
-                  <label for="train-name">Employee Name</label>
-                  <input class="form-control" id="trainName" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="destination">Role</label>
-                  <input class="form-control" id="destination" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="first-train-time">Start Date (MM/DD/YYYY)</label>
-                  <input class="form-control" id="firstTrain" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="train-frequency">Monthly Rate</label>
-                  <input class="form-control" id="interval" type="number">
-                </div>
-                <button class="btn btn-primary" id="addTrain" type="submit">Submit</button>
-              </form>
+        <div class="col s12 m3">
+          <div class="icon-block">
+            <h5 class="center">Zone 2 - Upcoming Events</h5>
+            
+            <p class="light"></p>
+                <p>* Button to Add Events to this section</p>
+
+          </div>
+<!-- Zone 3  -->        
+          <div class="icon-block">
+            <h5 class="center">Zone 3 - Google Maps</h5>
+
+            <p class="light"></p>
+                <p>* Google maps API that shows small map - if clicked, it would open a pop-up page with a full map and options for directions</p>
+          </div>
+        </div>
+<!-- Zone 4  -->   
+        <div class="col s12 m3">
+          <div class="icon-block">
+            <h5 class="center">Zone 4 - To Do List</h5>
+ 
+            <p class="light"></p>
+                <p>* Button to add new item along with required numb of participants</p>
+                <p>* 100 characters: When a user clicks one of the to do items they become a participant</p>
+                <p>----> The item from to do list moves over to Zone-5 (completed); however it's only highlighted when all number of participant is met</p>
+                <p>----> The name of this user is now highlighted in Zone-6 (Guest List for all) to know that they are contributing to the party</p>
+          </div>
+        </div>
+<!-- Zone 5  -->   
+        <div class="col s12 m3">
+          <div class="icon-block">
+            <h5 class="center">Zone 5</h5>
+
+            <p class="light"></p>
+                <p>* As tasks who have at least 1 contributer move into this zone we need to be able hover on the task and have a list of contributers names pop up on the screen</p>
+                <p>* NICE TO HAVE: when you click a task a chat window/history is shown where contributers can communicates with each other</p>
+          </div>
+        </div>
+<!-- Zone 6  -->   
+         <div class="col s12 m3">
+          <div class="icon-block">
+            <h5 class="center">Zone 6 - Guest List</h5>
+
+            <p class="light"></p>
+                <p>* All people attending this event will be shown</p>
+                <p>* When we hover over their name, their personal info along with what tasks they've signed up to participate in will be shown</p>
+          </div>
+        </div>
+      </div>
+<!-- Zone 7  -->   
+        <div class="row">
+          <div class="col s12 m12">
+            <div class="icon-block">
+              <div id="costume">
+                  <div id="Flickr">Search Flickr for Costume Ideas</div>
+                  <input id="search" type="text" placeholder="search text" />
+                  <button id="submit" onclick="JavaScriptFetch()">Submit</button>
+                  <div id="outputDiv"></div>
+              </div>
             </div>
           </div>
+        </div>
+    </div>
+    <br><br>
+  </div>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
         </div>
       </div>
     </div>
 
     
-    <div class="container">
-        <div id="content">
-            <div id="Flickr">Search Flickr for Costume Ideas</div>
-            <input id="search" type="text" placeholder="search text" />
-            <button id="submit" onclick="JavaScriptFetch()">Submit</button>
-            <div id="outputDiv"></div>
-        </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
     </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/js/materialize.js"></script>
+  <script src="assets/js/init.js"></script>
+  <script src="assets/javascript/app.js"></script>
 
   </body>
 </html>
-
