@@ -37,7 +37,24 @@ div.panel-body {
 	font-size: 15px;
 }
 
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+  border: 1px solid green;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
 #Flickr {
     font-size: 25px;
-    color: red;
+    color: black;
 }
