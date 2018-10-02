@@ -3,22 +3,27 @@
 <html>
 <head>
   <title></title>
-<!-- Latest compiled and minified CSS -->
+
+  <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+<!-- Link to JS file -->
+<script src="assets/javascript/app.js"></script>
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
  <link rel="stylesheet" href="assets/css/style.css">
 
- <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+ <!-- Ajax Link -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+ 
 
 </head>
   <body>
@@ -82,6 +87,17 @@
         </div>
       </div>
     </div>
+
+    
+    <div class="container">
+        <div id="content">
+            <div id="Flickr">Search Flickr for Costume Ideas</div>
+            <input id="search" type="text" placeholder="search text" />
+            <button id="submit" onclick="JavaScriptFetch()">Submit</button>
+            <div id="outputDiv"></div>
+        </div>
+    </div>
+
   </body>
 </html>
 
