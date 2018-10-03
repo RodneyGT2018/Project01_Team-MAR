@@ -1,50 +1,62 @@
-.jumbotron {
-    color: #fff;
-    background-position-y: 10%;
-    color: #fff;
-    background-color: #000 !important;
+
+
+body {
+	background-image:url("../images/halloween-bkg.jpg");
 }
 
-div.panel-body {
-    background-color: white;
-    color:  black;
-    
+.icon-block {
+	background: rgba(255,255,255, 0.9);
+    border-radius: 5px;
 }
 
-.btn-primary {
-    background-color: #0c55f1;
-    border-color: #fff;
-    font-weight: bold;
+.btn-halloween {
+	background-color:#000 !important;
 }
 
-.train-bkgrd {
-	background-repeat: no-repeat;
-	background-image: url(../images/database.jpg);
-	 background-size: 100% 159%;
+.icon-block {
+  padding: 0 15px;
+  border: 1px solid green;
+}
+.icon-block .material-icons {
+	font-size: inherit;
 }
 
-.row{
-    margin-top:40px;
-    padding: 0 10px;
+.stepwizard-step p {
+    margin-top: 10px;
 }
 
-.clickable{
-    cursor: pointer;   
+.stepwizard-row {
+    display: table-row;
 }
 
-.panel-heading span {
-	margin-top: -20px;
-	font-size: 15px;
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
 }
 
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
 
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
 
 .icon-block {
   padding: 0 15px;
@@ -58,3 +70,4 @@ div.panel-body {
     font-size: 25px;
     color: black;
 }
+
