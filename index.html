@@ -14,7 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-
+    <!-- Firebase link -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -74,14 +75,12 @@
         <div class="col s12 m3">
           <div class="icon-block">
             <h5 class="center">Zone 4 - To Do List</h5>
-
             <p class="light"></p>
-            <p>* Button to add new item along with required numb of participants</p>
-            <p>* 100 characters: When a user clicks one of the to do items they become a participant</p>
-            <p>----> The item from to do list moves over to Zone-5 (completed); however it's only highlighted when all
-              number of participant is met</p>
-            <p>----> The name of this user is now highlighted in Zone-6 (Guest List for all) to know that they are
-              contributing to the party</p>
+            <button id="add-to-do-items">Add To Do's</button>
+            <input id="to-do-input"type="text" placeholder="  add your wants...">
+            <div class="todo-block"></div>
+           
+         
           </div>
         </div>
         <!-- Zone 5  -->
@@ -90,10 +89,8 @@
             <h5 class="center">Zone 5</h5>
 
             <p class="light"></p>
-            <p>* As tasks who have at least 1 contributer move into this zone we need to be able hover on the task and
-              have a list of contributers names pop up on the screen</p>
-            <p>* NICE TO HAVE: when you click a task a chat window/history is shown where contributers can communicates
-              with each other</p>
+            <div class="assigned-block"></div>
+
           </div>
         </div>
         <!-- Zone 6  -->

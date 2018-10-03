@@ -1,3 +1,17 @@
+//initialize firebase
+var config = {
+  apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
+  authDomain: "mikesproject-bd0c2.firebaseapp.com",
+  databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
+  projectId: "mikesproject-bd0c2",
+  storageBucket: "mikesproject-bd0c2.appspot.com",
+  messagingSenderId: "911450662789"
+};
+firebase.initializeApp(config);
+var database = firebase.database()
+
+
+//initialize the map on the screen 
 var map;
     var longlat;
     var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
@@ -33,8 +47,31 @@ var map;
 
     }
 
-        
+    $(document).ready(function(){
+var i = 0
 
+    //Zone-4 "to do list"
+$('#add-to-do-items').on('click', function() {
+  console.log('inside the to do function')
+  var newDiv = $('<div>')
+  newDiv.attr('data-todo','todo'+[i])
+  newDiv.addClass('todoList')
+  newDiv.text($('#to-do-input').val().trim())
+  $('.todo-block').append(newDiv)
+  $('#to-do-input').val('')
+  i++
+})
+
+$('.todo-block').on('click', '.todoList', function(){
+  console.log('you clicked a item from to do list')
+  var tempDataVal = $(this).data('todo')
+  var tempHtmlInfo = $(this).html()
+  var newDiv = $('<div>')
+  newDiv.attr('data-assigned',tempDataVal)
+  newDiv.addClass('assigned-tasks')
+  newDiv.text(tempHtmlInfo)
+  $('.assigned-block').append(newDiv)
+})
 
 
 function JavaScriptFetch() {
@@ -59,4 +96,4 @@ $(document).ready(function () {
 
   });
 });
-
+    })
