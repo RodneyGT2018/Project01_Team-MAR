@@ -3,7 +3,7 @@
 body {
 	background-image:url("../images/halloween-bkg.jpg");
     background-color:#000;
-    background-repeat:no-repeat;
+    background-repeat: repeat-x;
 }
 
 .modal {

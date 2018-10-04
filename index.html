@@ -11,16 +11,9 @@
 
     <!-- Ajax Link -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 
     <!-- Firebase link -->
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-      crossorigin="anonymous"></script>
 
     <!-- CSS  -->
     <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -28,7 +21,7 @@
     <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0&callback=initMap"
       async defer></script>
-    <script src="assets/javascript/app.js"></script>
+
   </head>
 
 <body>
@@ -54,7 +47,6 @@
       </div>
     </div>
 
-
     <!-- Zone 2  -->
     <div class="section">
       <div class="row">
@@ -79,8 +71,7 @@
             <button id="add-to-do-items">Add To Do's</button>
             <input id="to-do-input"type="text" placeholder="  add your wants...">
             <div class="todo-block"></div>
-           
-         
+
           </div>
         </div>
         <!-- Zone 5  -->
@@ -119,7 +110,6 @@
         </div>
       </div>
     </div>
-    <br><br>
   </div>
 
   <footer class="page-footer orange">
@@ -164,6 +154,7 @@
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
+    <!-- Navigation -->
     <div class="stepwizard">
       <div class="stepwizard-row setup-panel">
         <div class="stepwizard-step">
@@ -181,6 +172,7 @@
       </div>
     </div>
     <form role="form">
+      <!-- Step 1 -->
       <div class="row setup-content" id="step-1">
         <div class="col s12">
           <div class="col s12">
@@ -198,26 +190,27 @@
           </div>
         </div>
       </div>
+      <!-- Step 2 -->
       <div class="row setup-content" id="step-2">
-          <div class="col s12">
-              <div class="col-md-12">
-                  <div class="input-field col s12">
-                      <label class="control-label">Event Details</label>
-                      <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
-                  </div>
-                  <div class="input-field col s12">
-                      <label class="control-label">Event Date</label>
-                      <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Date"  />
-                  </div>
-                    <div class="input-field col s12">
-                      <label class="control-label">Event Location</label>
-                      <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
-                  </div>
-                  <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-              </div>
-          </div>
+        <div class="col s12">
+            <div class="col-md-12">
+                <div class="input-field col s12">
+                    <label class="control-label">Event Details</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+                </div>
+                <div class="input-field col s12">
+                    <label class="control-label">Event Date</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Date"  />
+                </div>
+                <div class="input-field col s12">
+                  <label class="control-label">Event Location</label>
+                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
+                </div>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+            </div>
         </div>
       </div>
+       <!-- Step 3 -->
       <div class="row setup-content" id="step-3">
         <div class="col s12">
           <div class="col s12">
@@ -229,6 +222,11 @@
       </div>
     </form>
   </div>
+ <!-- javascript -->
+  
+  <script src="http:////cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
+  <script src="assets/javascript/init.js"></script>
 
 </body>
 
