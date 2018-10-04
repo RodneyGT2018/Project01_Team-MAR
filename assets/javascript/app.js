@@ -1,14 +1,4 @@
-//initialize firebase
-var config = {
-  apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
-  authDomain: "mikesproject-bd0c2.firebaseapp.com",
-  databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
-  projectId: "mikesproject-bd0c2",
-  storageBucket: "mikesproject-bd0c2.appspot.com",
-  messagingSenderId: "911450662789"
-};
-firebase.initializeApp(config);
-var database = firebase.database()
+
 
 
 //initialize the map on the screen 
@@ -48,18 +38,53 @@ var map;
     }
 
     $(document).ready(function(){
-var i = 0
+
+
+//initialize firebase
+var config = {
+  apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
+  authDomain: "mikesproject-bd0c2.firebaseapp.com",
+  databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
+  projectId: "mikesproject-bd0c2",
+  storageBucket: "mikesproject-bd0c2.appspot.com",
+  messagingSenderId: "911450662789"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database()
+var dataTodoCounter = 0
+//setup the Connections Child Ref
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+connectedRef.on("value", function(snap) {
+  if (snap.val()) {
+        var con = connectionsRef.push(true);
+        con.onDisconnect().remove();
+        }
+});
+
+
+
+
+
+
 
     //Zone-4 "to do list"
 $('#add-to-do-items').on('click', function() {
   console.log('inside the to do function')
   var newDiv = $('<div>')
-  newDiv.attr('data-todo','todo'+[i])
+  newDiv.attr('data-todo','todo'+[dataTodoCounter])
+  var toDoId = 'todo'+ dataTodoCounter
+  var toDoInstruction = $('#to-do-input').val().trim()
   newDiv.addClass('todoList')
   newDiv.text($('#to-do-input').val().trim())
   $('.todo-block').append(newDiv)
   $('#to-do-input').val('')
-  i++
+  database.ref('/toDoList').push({
+    toDoId,
+    toDoInstruction 
+  })
+  dataTodoCounter++
 })
 
 $('.todo-block').on('click', '.todoList', function(){
