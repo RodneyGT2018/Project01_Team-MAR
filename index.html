@@ -147,12 +147,12 @@
 
     <div class="footer-copyright">
       <div class="container">
-        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
       </div>
     </div>
   </footer>
 
   <!-- Modal Structure -->
+
   <div id="modal1" class="modal">
     <!-- Navigation -->
     <div class="stepwizard">
@@ -169,10 +169,16 @@
           <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
           <p>Step 3</p>
         </div>
+         <div class="stepwizard-step">
+          <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+          <p>Step 4</p>
+        </div>
       </div>
     </div>
     <form role="form">
+
       <!-- Step 1 -->
+
       <div class="row setup-content" id="step-1">
         <div class="col s12">
           <div class="col s12">
@@ -185,17 +191,23 @@
                       <label class="control-label">Email Address</label>
                       <input maxlength="100" type="text" required="required" class="form-control" placeholder="johndoe@email.com" />
                   </div>
+                  <div class="input-field col s12">
+                      <label class="control-label">Phone Number</label>
+                      <input maxlength="100" type="text" required="required" class="form-control" placeholder="(121-122-4444)" />
+                  </div>
                   <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" type="button" >Next</button>
               </div>
           </div>
         </div>
       </div>
+
       <!-- Step 2 -->
+
       <div class="row setup-content" id="step-2">
         <div class="col s12">
             <div class="col-md-12">
                 <div class="input-field col s12">
-                    <label class="control-label">Event Details</label>
+                    <label class="control-label">Event Name</label>
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
                 </div>
                 <div class="input-field col s12">
@@ -203,25 +215,104 @@
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Date"  />
                 </div>
                 <div class="input-field col s12">
-                  <label class="control-label">Event Location</label>
+                  <label class="control-label">Event Time</label>
                   <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
         </div>
       </div>
+
        <!-- Step 3 -->
+
       <div class="row setup-content" id="step-3">
         <div class="col s12">
-          <div class="col s12">
-              <div class="col s12">
-                  <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
-              </div>
+            <div class="col-md-12">
+                <div class="input-field col s12">
+                    <label class="control-label">Address</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+                </div>
+                <div class="input-field col s4">
+                    <label class="control-label">City</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Date"  />
+                </div>
+                <div class="input-field col s4">
+                  <label class="control-label">State</label>
+                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
+                </div>
+                <div class="input-field col s4">
+                  <label class="control-label">Zip</label>
+                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
+                </div>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+            </div>
+        </div>
+      </div>
+
+       <!-- Step 4 -->
+
+      <div class="setup-content" id="step-4">
+        <div class="row">
+          <div class="input-field col s5">
+              <label class="control-label">Name</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s5">
+              <label class="control-label">Items Needed</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s2">
+              <label class="control-label">Number</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="" />
           </div>
         </div>
+         <div class="row">
+          <div class="input-field col s5">
+              <label class="control-label">Name</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s5">
+              <label class="control-label">Items Needed</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s2">
+              <label class="control-label">Number</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="" />
+          </div>
+        </div>
+         <div class="row">
+          <div class="input-field col s5">
+              <label class="control-label">Name</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s5">
+              <label class="control-label">Items Needed</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s2">
+              <label class="control-label">Number</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="" />
+          </div>
+        </div>
+         <div class="row">
+          <div class="input-field col s5">
+              <label class="control-label">Name</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s5">
+              <label class="control-label">Items Needed</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+          </div>
+          <div class="input-field col s2">
+              <label class="control-label">Number</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="" />
+          </div>
+        </div>
+         <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
       </div>
     </form>
   </div>
+
  <!-- javascript -->
   
   <script src="http:////cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
