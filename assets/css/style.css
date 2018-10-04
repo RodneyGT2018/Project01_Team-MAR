@@ -2,6 +2,23 @@
 
 body {
 	background-image:url("../images/halloween-bkg.jpg");
+    background-color:#000;
+    background-repeat:no-repeat;
+}
+
+.modal {
+
+    padding:20px;
+    max-height:80% !important;
+}
+
+#outputDiv img {
+    border-style: none;
+    width: 250px;
+    height: 250px;
+    margin-right: -1px;
+    margin-top: 13px;
+    margin-left: 21px;
 }
 
 .icon-block {
@@ -47,10 +64,20 @@ body {
     content: " ";
     width: 100%;
     height: 1px;
-    background-color: #ccc;
     z-order: 0;
 
 }
+
+.btn-circle {
+    border-radius: 25px;
+    background-color: #d26811;
+}
+
+.btn-circle:hover {
+    border-radius: 25px;
+    background-color: orange;
+}
+
 
 .stepwizard-step {
     display: table-cell;
