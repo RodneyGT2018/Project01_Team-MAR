@@ -47,53 +47,51 @@ var map;
 
     }
 
-    $(document).ready(function(){
-var i = 0
+  $(document).ready(function(){
+    var i = 0
 
-    //Zone-4 "to do list"
-$('#add-to-do-items').on('click', function() {
-  console.log('inside the to do function')
-  var newDiv = $('<div>')
-  newDiv.attr('data-todo','todo'+[i])
-  newDiv.addClass('todoList')
-  newDiv.text($('#to-do-input').val().trim())
-  $('.todo-block').append(newDiv)
-  $('#to-do-input').val('')
-  i++
-})
+  //Zone-4 "to do list"
+  $('#add-to-do-items').on('click', function() {
+    console.log('inside the to do function')
+    var newDiv = $('<div>')
+    newDiv.attr('data-todo','todo'+[i])
+    newDiv.addClass('todoList')
+    newDiv.text($('#to-do-input').val().trim())
+    $('.todo-block').append(newDiv)
+    $('#to-do-input').val('')
+    i++
+  })
 
-$('.todo-block').on('click', '.todoList', function(){
-  console.log('you clicked a item from to do list')
-  var tempDataVal = $(this).data('todo')
-  var tempHtmlInfo = $(this).html()
-  var newDiv = $('<div>')
-  newDiv.attr('data-assigned',tempDataVal)
-  newDiv.addClass('assigned-tasks')
-  newDiv.text(tempHtmlInfo)
-  $('.assigned-block').append(newDiv)
-})
+  $('.todo-block').on('click', '.todoList', function(){
+    console.log('you clicked a item from to do list')
+    var tempDataVal = $(this).data('todo')
+    var tempHtmlInfo = $(this).html()
+    var newDiv = $('<div>')
+    newDiv.attr('data-assigned',tempDataVal)
+    newDiv.addClass('assigned-tasks')
+    newDiv.text(tempHtmlInfo)
+    $('.assigned-block').append(newDiv)
+  })
 
 
-function JavaScriptFetch() {
-  var script = document.createElement('script');
-  script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;;
-  document.querySelector('head').appendChild(script);
-}
+  function JavaScriptFetch() {
+    var script = document.createElement('script');
+    script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;;
+    document.querySelector('head').appendChild(script);
+  }
 
-function jsonFlickrFeed(data) {
-  var image = "";
-  data.items.forEach(function (element) {
-      image += "<img src=\"" + element.media.m + "\"/>";
-  });
+  function jsonFlickrFeed(data) {
+    var image = "";
+    data.items.forEach(function (element) {
+        image += "<img src=\"" + element.media.m + "\"/>";
+    });
 
-  document.getElementById("outputDiv").innerHTML = image;
-}
-
-$(document).ready(function () {
-  
+    document.getElementById("outputDiv").innerHTML = image;
+  }
+   
   $("#submit").click(function (e) {
       $("#outputDiv").html("");
 
-  });
-});
-    })
+    });
+
+})
