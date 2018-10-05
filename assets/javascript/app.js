@@ -1,6 +1,7 @@
 
 
 
+
 //initialize the map on the screen 
 var map;
 var longlat;
@@ -122,6 +123,7 @@ $(document).ready(function () {
     })
   })
 
+
   database.ref('/assigned').on('child_added', function (snapshot) {
     dataAssignedCounter = snapshot.numChildren() + 1
     console.log('in the database assigned Ref')
@@ -139,33 +141,28 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-  //Flicker Section
-  function JavaScriptFetch() {
-    var script = document.createElement('script');
-    script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;;
-    document.querySelector('head').appendChild(script);
-  }
-
-  function jsonFlickrFeed(data) {
-    var image = "";
-    data.items.forEach(function (element) {
-      image += "<img src=\"" + element.media.m + "\"/>";
+            var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + $("#search").val();
+            $.ajax({
+                url: flickerAPI,
+                dataType: "jsonp", // jsonp
+                jsonpCallback: 'jsonFlickrFeed', // add this property
+                success: function (result, status, xhr) {
+                    $.each(result.items, function (i, item) {
+                        $("<img>").attr("src", item.media.m).appendTo("#outputDiv");
+                        if (i === 10) {
+                            return false;
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr)
+                    $("#outputDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+                }
+            });
+            
+          });
+        });
+    /*End Zone 7 - Flickr Image Search*/
     });
+   
 
-    document.getElementById("outputDiv").innerHTML = image;
-  }
-
-  $("#submit").click(function (e) {
-    $("#outputDiv").html("");
-
-  });
-
-})
