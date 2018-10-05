@@ -60,6 +60,7 @@ $(document).ready(function () {
   var database = firebase.database()
   var dataTodoCounter = 0;
   var dataAssignedCounter = 0;
+  var tempQty = 6
 
 
 
@@ -74,37 +75,36 @@ $(document).ready(function () {
   });
 
 
-
-
-
-
   //Zone-4 "to do list"
   $('#add-to-do-items').on('click', function () {
     console.log('inside the to do function')
     var toDoId = 'todo' + dataTodoCounter
     var toDoInstruction = $('#to-do-input').val().trim()
+
+    var quantityRequiredEst = tempQty
+    tempQty--
     $('#to-do-input').val('')
-    database.ref('/toDoList').push({
+    database.ref('/toDoList/' + toDoInstruction).set({
       toDoId,
       toDoInstruction,
-      dataTodoCounter
+      quantityRequiredEst
     })
   })
 
-    database.ref('/toDoList').on('child_added', function (snapshot) {
-      dataTodoCounter = snapshot.numChildren() + 1
-      console.log('in the database update ref')
-      if (snapshot.val() === null) {
-        console.log('it was null')
-        return
-      } else {
-        console.log('made it to else statement')
-        console.log(snapshot.val().toDoInstruction)
-        $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + '> ' + snapshot.val().toDoInstruction + '</p>')
-      }
-    }, function (errorObject) {
-      console.log('The Read Failed: ' + errorObject.code)
-    })
+  database.ref('/toDoList').on('child_added', function (snapshot) {
+    dataTodoCounter = snapshot.numChildren() + 1
+    console.log('in the database update ref')
+    if (snapshot.val() === null) {
+      console.log('it was null')
+      return
+    } else {
+      console.log('made it to else statement')
+      console.log(snapshot.val().toDoInstruction)
+      $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + ' Data-qty=' + snapshot.val().quantityRequiredEst + '> ' + snapshot.val().toDoInstruction + '</p>')
+    }
+  }, function (errorObject) {
+    console.log('The Read Failed: ' + errorObject.code)
+  })
 
 
 
@@ -114,12 +114,26 @@ $(document).ready(function () {
   $('.todo-block').on('click', '.todoList', function () {
     console.log('you clicked a item from to do list')
     var tempDataVal = $(this).data('todo')
-    var tempHtmlInfo = $(this).html()
-    database.ref('/assigned').push({
+    var tempHtmlInfo = $(this).html().trim()
+    var quantityAssigned = $(this).data('qty') - 1
+    console.log(quantityAssigned)
+
+
+    database.ref('/assigned/' + tempHtmlInfo).set({
       assignedId: tempDataVal,
       toDoInstruction: tempHtmlInfo,
-      dataAssignedCounter
+      quantityAssigned
     })
+
+    
+    database.ref('toDoList/' + tempHtmlInfo).update({
+      quantityRequiredEst:1
+    })
+    
+  
+  
+
+
   })
 
   database.ref('/assigned').on('child_added', function (snapshot) {
@@ -131,10 +145,13 @@ $(document).ready(function () {
     } else {
       console.log('made it to else statement')
       console.log(snapshot.val().toDoInstruction)
-      $('.assigned-block').append('<p class="assigned-tasks" Data-assigned =' + snapshot.val().assignedId + '> ' + snapshot.val().toDoInstruction + '</p>')
+      $('.assigned-block').append('<p class="assigned-tasks" Data-qty = ' + snapshot.val().quantityAssigned + 'Data-assigned =' + snapshot.val().assignedId + '> ' + snapshot.val().toDoInstruction + '</p>')
     }
   }, function (errorObject) {
     console.log('The Read Failed: ' + errorObject.code)
+
+
+
   })
 
 
