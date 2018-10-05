@@ -5,37 +5,41 @@
 var map;
 var longlat;
 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-var address = '300 North Point PKWY, Alpharetta, GA'
-var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0'
-while (address.includes(' ')) {
-  address = address.replace(' ', '+')
-}
+// var address = '300 North Point PKWY, Alpharetta, GA'
+// var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0'
+// while (address.includes(' ')) {
+//   address = address.replace(' ', '+')
+// }
+
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 8
   })
-  map.setCenter({ lat: 34.0848, lng: -84.2559 })
-  map.setZoom(15)
-  var myLatLng = { lat: 34.0848, lng: -84.2559 }
-
-
-  $.ajax({
-    url: queryURL,
-    method: 'GET'
-  }).then(function (response) {
-    longlat = response.results[0].geometry.location
-    map.setZoom(12);
-    map.setCenter(longlat)
-    var marker = new google.maps.Marker({
-      position: longlat,
-      map: map,
-      title: 'Party Destination!!!',
-      icon: image
-    });
-  });
-
 }
+  
+  // map.setCenter({ lat: 34.0848, lng: -84.2559 })
+  // map.setZoom(15)
+  // var myLatLng = { lat: 34.0848, lng: -84.2559 }
+
+
+  // $.ajax({
+  //   url: queryURL,
+  //   method: 'GET'
+  // }).then(function (response) {
+  //   longlat = response.results[0].geometry.location
+  //   map.setZoom(12);
+  //   map.setCenter(longlat)
+  //   var marker = new google.maps.Marker({
+  //     position: longlat,
+  //     map: map,
+  //     title: 'Party Destination!!!',
+  //     icon: image
+  //   });
+  // });
+
+
 
 
 
@@ -45,34 +49,105 @@ function initMap() {
 $(document).ready(function () {
 
 
-  //initialize firebase
-  var config = {
-    apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
-    authDomain: "mikesproject-bd0c2.firebaseapp.com",
-    databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
-    projectId: "mikesproject-bd0c2",
-    storageBucket: "mikesproject-bd0c2.appspot.com",
-    messagingSenderId: "911450662789"
-  };
-  firebase.initializeApp(config);
+    //initialize firebase
+    var config = {
+      apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
+      authDomain: "mikesproject-bd0c2.firebaseapp.com",
+      databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
+      projectId: "mikesproject-bd0c2",
+      storageBucket: "mikesproject-bd0c2.appspot.com",
+      messagingSenderId: "911450662789"
+    };
+    firebase.initializeApp(config);
+  
+    //define global variables 
+    var database = firebase.database()
+    var dataTodoCounter = 0;
+    var dataAssignedCounter = 0;
+    var tempQty = 6
+  
+  
+  
+    //setup the Connections Child Ref
+    var connectionsRef = database.ref("/connections");
+    var connectedRef = database.ref(".info/connected");
+    connectedRef.on("value", function (snap) {
+      if (snap.val()) {
+        var con = connectionsRef.push(true);
+        con.onDisconnect().remove();
+      }
+    });
 
-  //define global variables 
-  var database = firebase.database()
-  var dataTodoCounter = 0;
-  var dataAssignedCounter = 0;
-  var tempQty = 6
 
 
+  //This will be the function that kicks off once an event host has filled out the initial event page.  The eventAdmin object is a place holder and will need to be constructed from user input
+  $('#event-input').on('click', function(){
 
-  //setup the Connections Child Ref
-  var connectionsRef = database.ref("/connections");
-  var connectedRef = database.ref(".info/connected");
-  connectedRef.on("value", function (snap) {
-    if (snap.val()) {
-      var con = connectionsRef.push(true);
-      con.onDisconnect().remove();
+    var eventAdmin = {
+      name: 'Mike B',
+      address: '300 North Point PKWY, Alpharetta, GA',
+      eventName: 'Halloween Buggy Down Bash!',
+      emailAddress: 'mike.f.bagheri@gmail.com',
+      phoneNum: 5616852328,
+      eventDate: '10/31/18',
+      eventTime: '21:00',
+      initialRequirement: [{'Beer':'10', 'chips': '5', 'Wine':'3'}]
     }
+    database.ref('/Host').set({
+      eventAdmin
+    })
+  })
+
+
+database.ref('/Host').on('child_added', function(snapshot){
+$('.event').append(
+  `
+  <p>Event Name:  ${snapshot.val().eventName}</p>
+  <p>Host: ${snapshot.val().name}</p>
+  <p>Address: ${snapshot.val().address}</P>
+  <p>Date: ${snapshot.val().eventDate}</p>
+  <p>Time: ${snapshot.eventTime}</p>
+
+`
+)
+
+var address = snapshot.val().address
+
+while (address.includes(' ')) {
+  address = address.replace(' ', '+')
+}
+
+var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0'
+
+
+$.ajax({
+  url: queryURL,
+  method: 'GET'
+}).then(function (response) {
+  longlat = response.results[0].geometry.location
+  map.setZoom(12);
+  map.setCenter(longlat)
+  var marker = new google.maps.Marker({
+    position: longlat,
+    map: map,
+    title: 'Party Destination!!!',
+    icon: image
   });
+});
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
 
 
   //Zone-4 "to do list"
@@ -125,7 +200,7 @@ $(document).ready(function () {
       quantityAssigned
     })
 
-    
+    //updating quantity of items still needed on the "to do" side after choice made by user
     database.ref('toDoList/' + tempHtmlInfo).update({
       quantityRequiredEst:1
     })
