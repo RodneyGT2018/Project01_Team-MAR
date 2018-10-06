@@ -1,9 +1,63 @@
+@font-face {
+font-family: "ravenscroft";
+src: url("fonts/ravenscroft-webfont.eot");
+src: 
+url("fonts/ravenscroft-webfont.woff") format("woff"),
+url("fonts/ravenscroft-webfont.svg#filename") format("svg");
+}
 
+
+nav .brand-logo {
+    color: #000;
+    font-size: 84px;
+    margin-top: 29px;
+    background-color: transparent !important;
+    box-shadow: none;
+}
 
 body {
 	background-image:url("../images/halloween-bkg.jpg");
     background-color:#000;
     background-repeat: repeat-x;
+}
+
+.brand-logo {
+    font-family: 'ravenscroft';
+    font-weight:normal;
+    font-style:normal;
+}
+
+.light-blue.lighten-1 {
+    background-color: transparent !important;
+    box-shadow: none;;
+}
+
+/*Creates table with scrollable tbody*/
+tbody {
+  display:block;
+  height:300px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em );
+  text-align:center;
+}
+table {
+  width:100%;
+}
+
+#nmbr-confirmed {
+    font-size:36px;
+}
+
+#party-name, #party-date, #party-time {
+    margin-right:40px;
+    font-size:18px;
 }
 
 .modal {
@@ -22,7 +76,7 @@ body {
 }
 
 .icon-block {
-	background: rgba(255,255,255, 0.9);
+	background: rgba(255,255,255, .9);
     border-radius: 5px;
 }
 
@@ -30,10 +84,16 @@ body {
 	background-color:#000 !important;
 }
 
+.btn-halloween-org {
+    background-color: #d26811 !important;
+}
+
 .icon-block {
   padding: 0 15px;
-  border: 1px solid green;
+  margin-top:25px;
 }
+
+
 .icon-block .material-icons {
 	font-size: inherit;
 }
@@ -66,6 +126,11 @@ body {
     height: 1px;
     z-order: 0;
 
+}
+
+.scroll-watch {
+    height: 1px;
+    overflow: scroll;
 }
 
 .btn-circle {
