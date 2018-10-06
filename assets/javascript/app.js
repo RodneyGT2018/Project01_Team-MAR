@@ -65,148 +65,211 @@ $(document).ready(function () {
   var dataTodoCounter = 0;
   var dataAssignedCounter = 0;
   var tempQty = 6
-
+  
 
 
   //setup the Connections Child Ref
   var connectionsRef = database.ref("/connections");
-  var connectedRef = database.ref(".info/connected");
-  connectedRef.on("value", function (snap) {
-    if (snap.val()) {
-      var con = connectionsRef.push(true);
-      con.onDisconnect().remove();
-    }
+            var connectedRef = database.ref(".info/connected");
+            connectedRef.on("value", function (snap) {
+            if (snap.val()) {
+              var con = connectionsRef.push(true);
+              con.onDisconnect().remove();
+            }
   });
 
 
 
   //This will be the function that kicks off once an event host has filled out the initial event page.  The eventAdmin object is a place holder and will need to be constructed from user input
   $('#event-input').on('click', function () {
+            var eventAdmin = {
+              name: 'Mike B',
+              address: '300 North Point PKWY, Alpharetta, GA',
+              eventName: 'Halloween Buggy Down Bash!',
+              emailAddress: 'mike.f.bagheri@gmail.com',
+              phoneNum: 5616852328,
+              eventDate: '10/31/18',
+              eventTime: '21:00',
+              initialRequirement: [{ 'item': ['beer', 24] }, { 'item': ['Wine', 3] }, { 'item': ['Chips', 3] }]
+            }
+            database.ref('/Host').set({
+              eventAdmin
+            })
 
-    var eventAdmin = {
-      name: 'Mike B',
-      address: '300 North Point PKWY, Alpharetta, GA',
-      eventName: 'Halloween Buggy Down Bash!',
-      emailAddress: 'mike.f.bagheri@gmail.com',
-      phoneNum: 5616852328,
-      eventDate: '10/31/18',
-      eventTime: '21:00',
-      initialRequirement: [{ 'item': ['beer', 24] }, { 'item': ['Wine', 3] }, { 'item': ['Chips', 3] }]
-    }
-    database.ref('/Host').set({
-      eventAdmin
-    })
+            var eventGuest = {
+              initialRequirement: eventAdmin.initialRequirement,
+              guestAdded: [{'placeholder':'0'}]
+            }  
+
+            //reset count of all items in eventGuest.initialRequirement
+            for (var i =0; i<eventGuest.initialRequirement.length;i++){
+                eventGuest.initialRequirement[i].item[1] = 0
+            }
+
+          database.ref('/Guests').set({
+            eventGuest
+
+          })
   })
 
-  //update the DOM with even plan info 
+
+
+
+  //update the DOM with event plan info 
   database.ref('/Host').on('child_added', function (snapshot) {
-    $('.event').append(
-      `
-  <p>Event Name:  ${snapshot.val().eventName}</p>
-  <p>Host: ${snapshot.val().name}</p>
-  <p>Address: ${snapshot.val().address}</P>
-  <p>Date: ${snapshot.val().eventDate}</p>
-  <p>Time: ${snapshot.eventTime}</p>
+                $('.event').append(
+                  `
+              <p>Event Name:  ${snapshot.val().eventName}</p>
+              <p>Host: ${snapshot.val().name}</p>
+              <p>Address: ${snapshot.val().address}</P>
+              <p>Date: ${snapshot.val().eventDate}</p>
+              <p>Time: ${snapshot.eventTime}</p>
 
-      `
-    )
+                  `
+                )
+              //update the DOM with required items needed at the party
+              for (var i = 0; i < snapshot.val().initialRequirement.length; i++) {
+                $('.todo-block').append(
+                  `
+                <p class="org-req-items" Data-item=${i} >${snapshot.val().initialRequirement[i].item[0]}      QTY: ${snapshot.val().initialRequirement[i].item[1]}</p>
 
-    //update the DOM with required items needed at the party
-    for (var i = 0; i < snapshot.val().initialRequirement.length; i++) {
-      $('.todo-block').append(
-        `
-      <p class="org-req-items" Data-item=${i} >${snapshot.val().initialRequirement[i].item[0]}      QTY: ${snapshot.val().initialRequirement[i].item[1]}</p>
-
-     `
-      )
-    }
-
-    //update/zoom map on to new event plan address 
-    var address = snapshot.val().address
-    while (address.includes(' ')) {
-      address = address.replace(' ', '+')
-    }
-
-    var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0'
-
-    $.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).then(function (response) {
-      longlat = response.results[0].geometry.location
-      map.setZoom(12);
-      map.setCenter(longlat)
-      var marker = new google.maps.Marker({
-        position: longlat,
-        map: map,
-        title: 'Party Destination!!!',
-        icon: image
-      });
-    });
+              `
+                )
+              }
+              //update/zoom map on to new event plan address 
+              var address = snapshot.val().address
+              while (address.includes(' ')) {
+                address = address.replace(' ', '+')
+              }
+                var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0'
+                $.ajax({
+                  url: queryURL,
+                  method: 'GET'
+                }).then(function (response) {
+                  longlat = response.results[0].geometry.location
+                  map.setZoom(12);
+                  map.setCenter(longlat)
+                  var marker = new google.maps.Marker({
+                    position: longlat,
+                    map: map,
+                    title: 'Party Destination!!!',
+                    icon: image
+                  });
+                });
   })
+
+
 
 
 
   $('.todo-block').on('click', '.org-req-items', function () {
-    var tempDataVal = $(this).data('item')
-    // tempDataVal = tempDataVal.parseFloat()
-    console.log(tempDataVal)
-    return database.ref('/Host').once('value').then(function (snapshot) {
-      console.log(snapshot.val())
-      var newQty = snapshot.val().eventAdmin.initialRequirement[tempDataVal].item[1] - 1
-      console.log(newQty)
+                  var tempDataVal = $(this).data('item')
+                  // tempDataVal = tempDataVal.parseFloat()
+                  console.log(tempDataVal)
 
-      //updating quantity of items still needed on the "to do" side after choice made by user
-      database.ref('Host/eventAdmin/initialRequirement/'+ tempDataVal + '/item').update({
-        1:newQty
-      })
+                  return database.ref('/Host').once('value').then(function (snapshot) {
+                    console.log(snapshot.val())
+                    var newQty = snapshot.val().eventAdmin.initialRequirement[tempDataVal].item[1] - 1
 
 
-      ////NEED TO SETUP GLOBAL FUNCTION TO UPDATE THE DOM....EVERYTHING ABOVE WORKS FINE
-      $('.todo-block').append(
-        `
-      <p class="org-req-items" Data-item=${i} >${snapshot.val().initialRequirement[].item[0]}      QTY: ${snapshot.val().initialRequirement[i].item[1]}</p>
+                    //updating quantity of items still needed on the "to do" side after choice made by user
+                    database.ref('Host/eventAdmin/initialRequirement/'+ tempDataVal + '/item').update({
+                      1:newQty
+                    })
 
-     `
-      )
-    }
 
-    })
 
+
+                //function to show subtracted items to bring in zone 4.  Each click above subtracts from pre-defined total and shows the remaining items to bring in the database and To-Do list area
+                database.ref('/Host').on('child_added', function (snapshot) {
+                  $('.todo-block').empty()
+                  for (var i = 0; i < snapshot.val().initialRequirement.length; i++) {
+                   
+                    if(snapshot.val().initialRequirement[i].item[1]>0){
+                        $('.todo-block').append(
+                          `
+                        <p class="org-req-items" Data-item=${i} >${snapshot.val().initialRequirement[i].item[0]}      QTY: ${snapshot.val().initialRequirement[i].item[1]}</p>
+
+                          `
+                        )
+                      }
+
+
+                  }
+                })
+
+
+                return database.ref('Guests').once('value').then(function(snapshotGuest) {
+
+                  var newQtyGuest = snapshotGuest.val().eventGuest.initialRequirement[tempDataVal].item[1] + 1
+                    //updating quantity of items still needed on the "to do" side after choice made by user
+                    database.ref('Guests/eventGuest/initialRequirement/'+ tempDataVal + '/item').update({
+                      1:newQtyGuest
+                    })
+
+                    database.ref('/Guests').on('child_added', function (snapshotGuests) {
+                      $('.assigned-block').empty()
+                      for (var i = 0; i < snapshotGuest.val().eventGuest.initialRequirement.length; i++) {
+  
+                        if(snapshotGuests.val().initialRequirement[i].item[1]>0){
+                              $('.assigned-block').append(
+                                `
+                              <p class="org-req-items-assigned" Data-item=${i} >${snapshotGuests.val().initialRequirement[i].item[0]}      QTY: ${snapshotGuests.val().initialRequirement[i].item[1]}</p>
+          
+                            `
+                              )
+                        }
+                      }
+                    })
+                   
+                  })
+
+                  
+
+
+
+
+                })
   })
+
+
+
 
 
 
 
   //Zone-4 "to do list"
   $('#add-to-do-items').on('click', function () {
-    console.log('inside the to do function')
-    var toDoId = 'todo' + dataTodoCounter
-    var toDoInstruction = $('#to-do-input').val().trim()
+            console.log('inside the to do function')
+            var toDoId = 'todo' + dataTodoCounter
+            var toDoInstruction = $('#to-do-input').val().trim()
 
-    var quantityRequiredEst = tempQty
-    tempQty--
-    $('#to-do-input').val('')
-    database.ref('/toDoList/' + toDoInstruction).set({
-      toDoId,
-      toDoInstruction,
-      quantityRequiredEst
-    })
+            var quantityRequiredEst = tempQty
+            tempQty--
+            $('#to-do-input').val('')
+            database.ref('/toDoList/' + toDoInstruction).set({
+              toDoId,
+              toDoInstruction,
+              quantityRequiredEst
+            })
   })
 
+
+
+
   database.ref('/toDoList').on('child_added', function (snapshot) {
-    dataTodoCounter = snapshot.numChildren() + 1
-    console.log('in the database update ref')
-    if (snapshot.val() === null) {
-      console.log('it was null')
-      return
-    } else {
-      console.log('made it to else statement')
-      console.log(snapshot.val().toDoInstruction)
-      $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + ' Data-qty=' + snapshot.val().quantityRequiredEst + '> ' + snapshot.val().toDoInstruction + '</p>')
-    }
-  }, function (errorObject) {
-    console.log('The Read Failed: ' + errorObject.code)
+            dataTodoCounter = snapshot.numChildren() + 1
+            console.log('in the database update ref')
+            if (snapshot.val() === null) {
+              console.log('it was null')
+              return
+            } else {
+              console.log('made it to else statement')
+              console.log(snapshot.val().toDoInstruction)
+              $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + ' Data-qty=' + snapshot.val().quantityRequiredEst + '> ' + snapshot.val().toDoInstruction + '</p>')
+            }
+          }, function (errorObject) {
+            console.log('The Read Failed: ' + errorObject.code)
   })
 
 
@@ -215,46 +278,41 @@ $(document).ready(function () {
 
   //on clicking a task move the to do into zone 5
   $('.todo-block').on('click', '.todoList', function () {
-    console.log('you clicked a item from to do list')
-    var tempDataVal = $(this).data('todo')
-    var tempHtmlInfo = $(this).html().trim()
-    var quantityAssigned = $(this).data('qty') - 1
-    console.log(quantityAssigned)
+            console.log('you clicked a item from to do list')
+            var tempDataVal = $(this).data('todo')
+            var tempHtmlInfo = $(this).html().trim()
+            var quantityAssigned = $(this).data('qty') - 1
+            console.log(quantityAssigned)
 
-
-    database.ref('/assigned/' + tempHtmlInfo).set({
-      assignedId: tempDataVal,
-      toDoInstruction: tempHtmlInfo,
-      quantityAssigned
-    })
-
-    //updating quantity of items still needed on the "to do" side after choice made by user
-    database.ref('toDoList/' + tempHtmlInfo).update({
-      quantityRequiredEst: 1
-    })
-
-
-
-
-
+            database.ref('/assigned/' + tempHtmlInfo).set({
+              assignedId: tempDataVal,
+              toDoInstruction: tempHtmlInfo,
+              quantityAssigned
+            })
+            
+            //updating quantity of items still needed on the "to do" side after choice made by user
+            database.ref('toDoList/' + tempHtmlInfo).update({
+              quantityRequiredEst: 1
+            })
   })
 
+
+
+
+
   database.ref('/assigned').on('child_added', function (snapshot) {
-    dataAssignedCounter = snapshot.numChildren() + 1
-    console.log('in the database assigned Ref')
-    if (snapshot.val() === null) {
-      console.log('it was null')
-      return
-    } else {
-      console.log('made it to else statement')
-      console.log(snapshot.val().toDoInstruction)
-      $('.assigned-block').append('<p class="assigned-tasks" Data-qty = ' + snapshot.val().quantityAssigned + 'Data-assigned =' + snapshot.val().assignedId + '> ' + snapshot.val().toDoInstruction + '</p>')
-    }
-  }, function (errorObject) {
-    console.log('The Read Failed: ' + errorObject.code)
-
-
-
+            dataAssignedCounter = snapshot.numChildren() + 1
+            console.log('in the database assigned Ref')
+            if (snapshot.val() === null) {
+              console.log('it was null')
+              return
+            } else {
+              console.log('made it to else statement')
+              console.log(snapshot.val().toDoInstruction)
+              $('.assigned-block').append('<p class="assigned-tasks" Data-qty = ' + snapshot.val().quantityAssigned + 'Data-assigned =' + snapshot.val().assignedId + '> ' + snapshot.val().toDoInstruction + '</p>')
+            }
+          }, function (errorObject) {
+            console.log('The Read Failed: ' + errorObject.code)
   })
 
 
