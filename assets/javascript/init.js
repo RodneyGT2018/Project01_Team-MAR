@@ -6,6 +6,10 @@ $( document ).ready(function() {
     	$('#modal1').modal('open');
     });
 
+     $('#modalTrigger2').on('click', function() {
+        $('#modal2').modal('open');
+    });
+
 	var navListItems = $('div.setup-panel div a'),
 	    allWells = $('.setup-content'),
 	    allNextBtn = $('.nextBtn');
