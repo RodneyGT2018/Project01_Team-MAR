@@ -98,7 +98,6 @@ $(document).ready(function () {
 
     var eventGuest = {
       initialRequirement: eventAdmin.initialRequirement,
-      guestAdded: [{ 'placeholder': '0' }]
     }
 
     //reset count of all items in eventGuest.initialRequirement
@@ -138,16 +137,33 @@ $(document).ready(function () {
         )
       }
     }
-    database.ref('/Guests').on('child_added', function (snapshotGuests) {
+
+
+
+
+
+
+    database.ref('/Guests').on('value', function (snapshotGuests) {
       $('.assigned-block').empty()
-      for (var i = 0; i < snapshotGuests.val().initialRequirement.length; i++) {
-        if (snapshotGuests.val().initialRequirement[i].item[1] > 0) {
+      for (var i = 0; i < snapshotGuests.val().eventGuest.initialRequirement.length; i++) {
+        if (snapshotGuests.val().eventGuest.initialRequirement[i].item[1] > 0) {
           $('.assigned-block').append(
             `
-              <p class="org-req-items-assigned" Data-item=${i} >${snapshotGuests.val().initialRequirement[i].item[0]}      QTY: ${snapshotGuests.val().initialRequirement[i].item[1]}</p>
+              <p class="org-req-items-assigned" Data-item=${i} >${snapshotGuests.val().eventGuest.initialRequirement[i].item[0]}      QTY: ${snapshotGuests.val().eventGuest.initialRequirement[i].item[1]}</p>
 
             `
           )
+        }
+        if (snapshotGuests.val().guestAdded !== 'undefined'){
+            for(var i = 0; i < snapshotGuests.val().guestAdded.length;i++){
+              $('.todo-block').append(
+                `
+                  <p class="guest-added-items" data-item=${i} >${snapshotGuests.val().guestAdded[i].guestAddedLineItem}  Qty: ${snapshotGuests.val().guestAdded[i].guestAddedLineItemQty}</p> 
+      
+                `
+              )  
+            }
+          
         }
       }
     })
@@ -189,11 +205,10 @@ $(document).ready(function () {
       database.ref('Host/eventAdmin/initialRequirement/' + tempDataVal + '/item').update({
         1: newQty
       })
-      //function to show subtracted items to bring in zone 4.  Each click above subtracts from pre-defined total and shows the remaining items to bring in the database and To-Do list area
+      // function to show subtracted items to bring in zone 4.  Each click above subtracts from pre-defined total and shows the remaining items to bring in the database and To-Do list area
       database.ref('/Host').on('child_added', function (snapshot) {
         $('.todo-block').empty()
         for (var i = 0; i < snapshot.val().initialRequirement.length; i++) {
-
           if (snapshot.val().initialRequirement[i].item[1] > 0) {
             $('.todo-block').append(
               `
@@ -212,14 +227,14 @@ $(document).ready(function () {
         database.ref('Guests/eventGuest/initialRequirement/' + tempDataVal + '/item').update({
           1: newQtyGuest
         })
-        database.ref('/Guests').on('child_added', function (snapshotGuests) {
+        database.ref('/Guests').on('value', function (snapshotGuests) {
           $('.assigned-block').empty()
           for (var i = 0; i < snapshotGuest.val().eventGuest.initialRequirement.length; i++) {
 
-            if (snapshotGuests.val().initialRequirement[i].item[1] > 0) {
+            if (snapshotGuests.val().eventGuest.initialRequirement[i].item[1] > 0) {
               $('.assigned-block').append(
                 `
-                  <p class="org-req-items-assigned" Data-item=${i} >${snapshotGuests.val().initialRequirement[i].item[0]}      QTY: ${snapshotGuests.val().initialRequirement[i].item[1]}</p>
+                  <p class="org-req-items-assigned" Data-item=${i} >${snapshotGuests.val().eventGuest.initialRequirement[i].item[0]}      QTY: ${snapshotGuests.val().eventGuest.initialRequirement[i].item[1]}</p>
                 `
               )
             }
@@ -239,37 +254,55 @@ $(document).ready(function () {
 
   //Zone-4 "to do list" (submit button)
   $('#add-to-do-items').on('click', function () {
-    console.log('inside the to do function')
-    var toDoId = 'todo' + dataTodoCounter
-    var toDoInstruction = $('#to-do-input').val().trim()
+    console.log('Guest is trying to volunteer a new item to bring ')
+    //Capture input item name 
+    var guestAddedLineItem = $('#to-do-input').val().trim()
+    //capture input Qty
+    var guestAddedLineItemQty = 5
+     
+    return database.ref('Guests/guestAdded').once('value').then(function(snapshotGuestsAdded){
+     
+    var numExistingRecords = snapshotGuestsAdded.numChildren()
+    console.log(numExistingRecords)
+   
+    
 
-    var quantityRequiredEst = tempQty
-    tempQty--
-    $('#to-do-input').val('')
-    database.ref('/toDoList/' + toDoInstruction).set({
-      toDoId,
-      toDoInstruction,
-      quantityRequiredEst
-    })
-  })
-
-
-
-
-  database.ref('/toDoList').on('child_added', function (snapshot) {
-    dataTodoCounter = snapshot.numChildren() + 1
-    console.log('in the database update ref')
-    if (snapshot.val() === null) {
-      console.log('it was null')
-      return
-    } else {
-      console.log('made it to else statement')
-      console.log(snapshot.val().toDoInstruction)
-      $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + ' Data-qty=' + snapshot.val().quantityRequiredEst + '> ' + snapshot.val().toDoInstruction + '</p>')
+    if(typeof numExistingRecords === 'undefined' ){
+        numExistingRecords = 0
+        database.ref('Guests/guestAdded/'+ numExistingRecords).set({
+          guestAddedLineItem,
+          guestAddedLineItemQty
+        })
+    }else {
+        database.ref('Guests/guestAdded/'+ numExistingRecords).set({
+          guestAddedLineItem,
+          guestAddedLineItemQty
+        })
+           
     }
-  }, function (errorObject) {
-    console.log('The Read Failed: ' + errorObject.code)
+    })
+    
+ 
   })
+
+
+
+
+
+  // database.ref('/toDoList').on('child_added', function (snapshot) {
+  //   dataTodoCounter = snapshot.numChildren() + 1
+  //   console.log('in the database update ref')
+  //   if (snapshot.val() === null) {
+  //     console.log('it was null')
+  //     return
+  //   } else {
+  //     console.log('made it to else statement')
+  //     console.log(snapshot.val().toDoInstruction)
+  //     $('.todo-block').append('<p class="todoList" Data-todo =' + snapshot.val().toDoId + ' Data-qty=' + snapshot.val().quantityRequiredEst + '> ' + snapshot.val().toDoInstruction + '</p>')
+  //   }
+  // }, function (errorObject) {
+  //   console.log('The Read Failed: ' + errorObject.code)
+  // })
 
 
 
