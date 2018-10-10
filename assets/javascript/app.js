@@ -44,14 +44,15 @@ $(document).ready(function () {
 
   //initialize firebase
   var config = {
-    apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
-    authDomain: "mikesproject-bd0c2.firebaseapp.com",
-    databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
-    projectId: "mikesproject-bd0c2",
-    storageBucket: "mikesproject-bd0c2.appspot.com",
-    messagingSenderId: "911450662789"
-  };
-  firebase.initializeApp(config);
+    apiKey: "AIzaSyD9XEx6O9kjw0SuRRXcVjjC9k30l4PuxJc",
+    authDomain: "author-page.firebaseapp.com",
+    databaseURL: "https://author-page.firebaseio.com",
+    projectId: "author-page",
+    storageBucket: "author-page.appspot.com",
+    messagingSenderId: "797162172587"
+};
+
+firebase.initializeApp(config);
 
   //define global variables 
   var database = firebase.database()
@@ -347,24 +348,35 @@ $(document).ready(function () {
 
 
 //   //Flicker Section
-//   function JavaScriptFetch() {
-//     var script = document.createElement('script');
-//     script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;;
-//     document.querySelector('head').appendChild(script);
-//   }
+$(document).ready(function () {
+  $("#reset").click(function (e) {
+      location.reload();
+  });
 
-//   function jsonFlickrFeed(data) {
-//     var image = "";
-//     data.items.forEach(function (element) {
-//       image += "<img src=\"" + element.media.m + "\"/>";
-//     });
+  $("#submit").click(function (e) {
+      $("#outputDiv").html("");
 
-//     document.getElementById("outputDiv").innerHTML = image;
-//   }
 
-//   $("#submit").click(function (e) {
-//     $("#outputDiv").html("");
+var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + $("#search").val();
+      $.ajax({
+          url: flickerAPI,
+          dataType: "jsonp", // jsonp
+          jsonpCallback: 'jsonFlickrFeed', // add this property
+          success: function (result, status, xhr) {
+              $.each(result.items, function (i, item) {
+                  $("<img>").attr("src", item.media.m).appendTo("#outputDiv");
+                  if (i === 10) {
+                      return false;
+                  }
+              });
+          },
+          error: function (xhr, status, error) {
+              console.log(xhr)
+              $("#outputDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+          }
+      });
+    /*End*/
 
-//   });
-
+  });
+});
 });
