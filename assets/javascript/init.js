@@ -1,5 +1,6 @@
 
 $( document ).ready(function() {
+    
     $('.modal').modal();
       
     $('#modalTrigger').on('click', function() {
@@ -8,10 +9,6 @@ $( document ).ready(function() {
 
      $('#modalTrigger2').on('click', function() {
         $('#modal2').modal('open');
-    });
-
-    $('#modalTrigger3').on('click', function() {
-        $('#modal3').modal('open');
     });
 
 	var navListItems = $('div.setup-panel div a'),
@@ -54,5 +51,10 @@ $( document ).ready(function() {
     });
 
     $('div.setup-panel div a.btn-primary').trigger('click');
+
+    $('#submit-item-name').on('click', function() {
+        $('#modal2').modal('close');
+        console.log('its working');
+    });
 
 });
