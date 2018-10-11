@@ -106,6 +106,14 @@ table {
 }
 
 
+.responsive-table p {
+    display: block;
+    background-color: #f1f1f1;
+    padding: 15px 5px;
+    color: #a99e9e;
+}
+
+
 .icon-block .material-icons {
 	font-size: inherit;
 }
