@@ -16,7 +16,7 @@ function initMap() {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 8
   })
-}
+};
 
 // map.setCenter({ lat: 34.0848, lng: -84.2559 })
 // map.setZoom(15)
@@ -107,6 +107,7 @@ firebase.initializeApp(config);
     database.ref('/Host').set({
       eventAdmin
     });
+
   
 
     // var eventGuest = {
@@ -344,7 +345,5 @@ firebase.initializeApp(config);
 //     }
 //   }, function (errorObject) {
 //     console.log('The Read Failed: ' + errorObject.code)
-//   })
-
-
+  // })
 
