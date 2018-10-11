@@ -55,4 +55,9 @@ $( document ).ready(function() {
 
     $('div.setup-panel div a.btn-primary').trigger('click');
 
+    $('#submit-item-name').on('click', function() {
+        $('#modal2').modal('close');
+        console.log('its working');
+    });
+
 });

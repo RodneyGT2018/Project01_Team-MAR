@@ -2,35 +2,40 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Event Template </title>
+  <title></title>
 
-  <!-- Ajax Link -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="http:////cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-  <!-- Firebase link -->
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Halloween Boogie Night</title>
 
-  <!-- CSS  -->
-  <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0&callback=initMap"
-    async defer></script>
-
-  <!-- javascript -->
-  <script src="assets/javascript/app.js"></script>
-  <script src="assets/javascript/Authentication.js"></script>
-  <script src="assets/javascript/Flickr.js"></script>
+    <!-- Ajax Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http:////cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <!-- Firebase link -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
 
 
-</head>
+    <!-- CSS  -->
+    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbMW1zoS4wDZPiww8JT1EDrUr0jfbeqw0&callback=initMap"
+      async defer></script>
+
+    <!-- javascript -->
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/Flickr.js"></script>
+
+  </head>
+
 
 <body>
   <!-- Zone 1  -->
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">My Party</a>
+
+    <div class="nav-wrapper container">
+
       <ul class="right hide-on-med-and-down">
         <ul id="nav-mobile" class="sidenav"></ul>
       </ul>
@@ -45,10 +50,11 @@
        <!-- Zone 2  -->
       <div class="section">
         <div class="row">
+
           <div class="col s12 m8">
-            <span id="party-name">Party Name</span>
-            <span id="party-date">Party Date</span>
-            <span id="party-time">Party Time</span>
+            <span id="party-name"></span>
+            <span id="party-date"></span>
+            <span id="party-time"></span>
             <span>Attendance: </span><span id="nmbr-confirmed"></span>
           </div>
           <div class="col s12 m4">
@@ -67,96 +73,48 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m5 responsive-table">
+        <div class="col s12 m7 responsive-table">
          <table class="striped">
           <thead>
+            <p><strong>Items available claimed for event.</strong></p>
             <tr>
               <th>Item Name</th>
-              <th># Items</th>
+              <th>Qty</th>
               <th>Add Items</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Soda</td>
-              <td>5</td>
-              <td> <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">add</i></a></td>
-            </tr>
-            <tr>
-              <td>Beer</td>
-              <td>3</td>
-              <td> <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">add</i></a></td>
-            </tr>
-            <tr>
-              <td>Bread</td>
-              <td>2</td>
-              <td> <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">add</i></a></td>
-            </tr>
-            <tr>
-              <td>Napkins</td>
-              <td>3</td>
-              <td> <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">add</i></a></td>
-            </tr>
-          </tbody>
+          <tbody class="responsive-table-body-req"></tbody>
         </table>
         </div>
-         <div class="col s12 m7 responsive-table">
+         <div class="col s12 m5 responsive-table">
          <table class="striped">
           <thead>
+          <p><strong>Items already claimed for event</strong></p>
             <tr>
-              <th>Guest</th>
               <th>Items</th>
-              <th>How many?</th>
-              <th>Remove</th>
+              <th>Qty</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>Bread</td>
-                <td>5</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a></td>
-            </tr>
-            <tr>
-                   <td>John Doe</td>
-                <td>Bread</td>
-                <td>5</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a></td>
-            </tr>
-            <tr>
-                  <td>John Doe</td>
-                <td>Bread</td>
-                <td>5</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a></td>
-            </tr>
-            <tr>
-                  <td>John Doe</td>
-                <td>Bread</td>
-                <td>5</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a></td>
-            </tr>
+          <tbody class = "responsive-table-body-res">
           </tbody>
         </table>
         </div>
       </div>
 
-      <!-- Zone 5  -->     
+      <!-- Zone 5  -->
+      <hr>     
       <div class="row">
         <div class="col s12 m8">
-          <div>
-            <h5>Costume Finder</h5>
-            <div class="container">
-              <div id="content">
-              <h3><button id="reset">Reset »</button></h3>
-              <input id="search" type="text" placeholder="search text" />
-              <button id="submit">Submit</button>
-              <div id="outputDiv"></div>
-              </div>
-            </div>
+          <h5>Costume Finder</h5>
+          <div id="content">
+            <h3><button id="reset" class="btn-halloween btn">RESET</button></h3>
+            <input id="search" type="text" placeholder="search text" />
+            <button id="submit" class="btn-halloween btn">Submit</button>
+            <div id="outputDiv"></div>
           </div>
         </div>
         <div class="col s12 m4">
-          <div id="event-location">2154 Riverboat Rd. GA 30034</div>
+          <div id="event-location"></div>
             <div id="map"></div>
           </div>
         </div>
@@ -168,11 +126,13 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <p class="grey-text text-lighten-4">Copywright 2018</p>
+          <h5 class="white-text">Mi Party App Inc.</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our
+            full time job. Any amount would help support and continue development on this project and is greatly
+            appreciated.</p>
         </div>
       </div>
     </div>
-
 
     <div class="footer-copyright">
       <div class="container">
@@ -211,13 +171,13 @@
    <div id="modal2"  class="modal row setup-content">
      <div class="input-field col s6">
           <label class="control-label">Item</label>
-          <input id="add-item-name"  maxlength="100" type="text" required="required"  class="form-control" placeholder="Item Name"  />
+          <input id="add-item-name"  maxlength="100" type="text" required="required"  class="form-control" placeholder="What are you bringing to the party?"  />
       </div>
        <div class="input-field col s6">
           <label class="control-label">Quantity</label>
-          <input id="quantity-nmbr"  maxlength="100" type="text" required="required" class="form-control" placeholder="Quantity Number"  />
+          <input id="add-item-qty"  maxlength="100" type="text" required="required" class="form-control" placeholder="How Many?"  />
       </div>
-       <button id="submit-item-name" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Submit</button>
+       <button id="submit-item-name" class="btn btn-primary btn-lg pull-right btn-halloween-org" type="button" >Submit</button>
   </div>
 
   <div id="modal1" class="modal">
@@ -242,7 +202,6 @@
         </div>
       </div>
     </div>
-    <form role="form">
 
       <!-- Step 1 -->
 
@@ -275,7 +234,7 @@
             <div class="col-md-12">
                 <div class="input-field col s12">
                     <label class="control-label">Event Name</label>
-                    <input id="event-name" maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+                    <input id="event-name" maxlength="200" type="text" required="required" class="form-control" placeholder="Give your event a cool name?" />
                 </div>
                 <div class="input-field col s12">
                     <label class="control-label">Event Date</label>
@@ -283,9 +242,9 @@
                 </div>
                 <div class="input-field col s12">
                   <label class="control-label">Event Time</label>
-                  <input id="event-time" maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
+                  <input id="event-time" maxlength="200" type="text" required="required" class="form-control" placeholder="What time does the party Start?"  />
                 </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+                <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" type="button" >Next</button>
             </div>
         </div>
       </div>
@@ -297,7 +256,7 @@
             <div class="col-md-12">
                 <div class="input-field col s12">
                     <label class="control-label">Address</label>
-                    <input id="event-address" maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Name" />
+                    <input id="event-address" maxlength="200" type="text" required="required" class="form-control" placeholder="Event Address" />
                 </div>
                 <div class="input-field col s4">
                     <label class="control-label">City</label>
@@ -311,7 +270,7 @@
                   <label class="control-label">Zip</label>
                   <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Event Location"  />
                 </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+                <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" type="button" >Next</button>
             </div>
         </div>
       </div>
@@ -319,16 +278,16 @@
        <!-- Step 4 -->
 
       <div class="setup-content" id="step-4">
-        <div class="row">
-          <div class="input-field col s10">
-              <label class="control-label">Items Needed</label>
-              <input id="items-needed-1" maxlength="200" type="text" required="required" class="form-control item-name" placeholder="Enter Event Name" />
+          <div class="row">
+            <div class="input-field col s10">
+                <label class="control-label">Items Needed</label>
+                <input id="items-needed-1" maxlength="200" type="text" required="required" class="form-control item-name" placeholder="Enter Event Name" />
+            </div>
+            <div class="input-field col s2">
+                <label class="control-label">Number</label>
+                <input id="quantity-needed-1" maxlength="200" type="text" required="required" class="form-control item-number" placeholder="" />
+            </div>
           </div>
-          <div class="input-field col s2">
-              <label class="control-label">Number</label>
-              <input id="quantity-needed-1" maxlength="200" type="text" required="required" class="form-control item-number" placeholder="" />
-          </div>
-        </div>
          <div class="row">
           <div class="input-field col s10">
               <label class="control-label">Items Needed</label>
@@ -339,46 +298,22 @@
               <input id="quantity-needed-2" maxlength="200" type="text" required="required" class="form-control item-number" placeholder="" />
           </div>
         </div>
-         <div class="row">
-          <div class="input-field col s10">
-              <label class="control-label">Items Needed</label>
-              <input id="items-needed-3" maxlength="200" type="text" required="required" class="form-control item-name" placeholder="Enter Event Name" />
-          </div>
-          <div class="input-field col s2">
-              <label class="control-label">Number</label>
-              <input id="quantity-needed-3" maxlength="200" type="text" required="required" class="form-control item-number" placeholder="" />
-          </div>
-        </div>
-         <div class="row">
-          <div class="input-field col s10">
-              <label class="control-label">Items Needed</label>
-              <input id="quantity-needed-4" maxlength="200" type="text" required="required" class="form-control item-name" placeholder="Enter Event Name" />
-          </div>
-          <div class="input-field col s2">
-              <label class="control-label">Number</label>
-              <input id="quantity-needed-4" maxlength="200" type="text" required="required" class="form-control item-number" placeholder=""/>
-          </div>
-        </div>
-         <button id="submit-finish-btn" class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
+         <button id="submit-finish-btn" class="btn btn-success btn-lg pull-right btn-halloween-org" type="submit">Finish!</button>
       </div>
-    </form>
 
       <script src="assets/javascript/init.js"></script>
-          
-<script src="assets/javascript/bug.js"></script>
-          <script type='text/javascript'>
-          // default fruit fly bug:
-          new BugController({
-          });
+      <script src="assets/javascript/bug.js"></script>
+      <script type='text/javascript'>
+        // default fruit fly bug:
+        new BugController({
+        });
 
-          // default spiders:
-          new SpiderController({
-          });
-        </script>
-      
-      
+        // default spiders:
+        new SpiderController({
+        });
+      </script>
 
 
+</body>
 
-  </body>
-</html>
+</html
