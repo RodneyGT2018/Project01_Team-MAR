@@ -110,7 +110,7 @@
     .responsive-table p {
         display: block;
         background-color: #f1f1f1;
-        padding: 15px 5px;
+        padding: 7px 5px;
         color: #a99e9e;
     }
     
@@ -210,3 +210,21 @@
     table.striped>tbody>tr:nth-child(odd) {
         background-color: rgba(226, 255, 236, 0.5);
     }
+    
+    .btn-mobile-mn{
+        display:none;
+    }
+    
+    @media screen and (max-width: 600px) {
+         .btn-mobile-mn{
+            display:block;
+        }
+        .btn {
+            width:100%;
+            margin: 7px 0;
+        }
+        .non-mobile-1 {
+            display:none;
+        }
+    }
+    
