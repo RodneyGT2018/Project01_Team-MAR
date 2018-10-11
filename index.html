@@ -108,7 +108,7 @@
               <th>Names</th>
             </tr>
           </thead>
-          <tbody class = "responsive-table-body-name">
+          <tbody class = "responsive-table-body-name" id="attendees">
           </tbody>
         </table>
         </div>
@@ -193,7 +193,7 @@
                       <label class="control-label">Password</label>
                       <input id="host-password" maxlength="100" type="password" required="required" class="form-control" placeholder="********" />
                   </div>
-                  <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" id="signup-btn" type="button" >Next</button>
+                  <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween"  type="button" >Next</button>
               </div>
           </div>
         </div>
@@ -278,22 +278,18 @@
     <div class="row" id="user-sign-up">
         <div class="col s12">
             <div class="input-field col s12">
-                <label class="control-label">Name</label>
-                <input id="users-name"  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name"  />
-            </div>
-            <div class="input-field col s12">
-                <label class="control-label">Email Address</label>
+                <label class="control-label">Username</label>
                 <input id="users-email" maxlength="100" type="text" required="required" class="form-control" placeholder="johndoe@email.com" />
             </div>
              <div class="input-field col s12">
-                <label class="control-label">Username</label>
-                <input id="username" maxlength="100" type="text" required="required" class="form-control" placeholder="username" />
+                <label class="control-label">Display-name</label>
+                <input id="username" maxlength="100" type="text" required="required" class="form-control" placeholder="display name" />
             </div>
             <div class="input-field col s12">
                 <label class="control-label">Password</label>
                 <input id="users-password" maxlength="100" type="password" required="required" class="form-control" placeholder="********" />
             </div>
-            <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" type="button" >Submit</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" id="signup-btn" type="button" >Submit</button>
         </div>
     </div>
   </div>
@@ -308,15 +304,15 @@
               <input id="sign-in-username" maxlength="100" type="text" required="required" class="form-control" placeholder="username" />
             </div> -->
             <div class="input-field col s12">
-              <label for="uname">Username*</label>
-              <input id="uname" name="uname" type="text" data-error=".errorTxt1" placeholder="username">
+              <label for="uname">User Email*</label>
+              <input id="uname" name="uname" type="text" data-error=".errorTxt1" placeholder="Email Address">
               <div class="errorTxt1"></div>
             </div>
             <div class="input-field col s12">
                 <label class="control-label">Password</label>
                 <input id="sign-in-password" maxlength="100" type="password" required="required" class="form-control" placeholder="********" />
             </div>
-            <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" type="button" >Submit</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right btn-halloween" id="signin-btn" type="button" >Submit</button>
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ $(document).ready(function () {
   //This will be the function that kicks off once an event host has filled out the initial event page.  The eventAdmin object is a place holder and will need to be constructed from user input
   $('#submit-finish-btn').on('click', function () {
 
-  
+
 
     var getHostName = $("#host-name").val().trim();
     var getHostEmail = $("#host-email").val().trim();
@@ -93,8 +93,8 @@ $(document).ready(function () {
 
     //   })
 
-   
-   
+
+
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -127,98 +127,180 @@ $(document).ready(function () {
 
       });
     });
-  
+
   });
 
 
-//Sign out button function
-$('#sign-out').on('click', function(){
-  if (firebase.auth().currentUser) {
-    // [START signout]
-    console.log(firebase.auth().signOut());
-    console.log('you are logged out')
-  } else {
-    console.log('no one is logged in')
-    return
-  }
-
-})
-
-//sign up button function 
-$('#signup-btn').on('click', function(){
-
-  var name  = $('#users-name').val().trim()
-  var email = $('#users-email').val().trim()
-  var password = $('#users-password').val().trim()
-
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // [START_EXCLUDE]
-    if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak.');
+  //Sign out button function
+  $('#sign-out').on('click', function () {
+    if (firebase.auth().currentUser) {
+      // [START signout]
+      console.log(firebase.auth().signOut());
+      console.log('you are logged out')
     } else {
-      alert(errorMessage);
+      console.log('no one is logged in')
+      return
     }
-    console.log(error);
-    // [END_EXCLUDE]
+
   })
 
-})
+  //sign up button function 
+  $('#signup-btn').on('click', function () {
+    console.log('you are in the sign up button')
 
-
-
-  function captureCurrentUserInfo(snapshot) {
-    console.log('inside the capture current user info function')
-    var name = ''
-    var email = ''
-    var thisPerson = firebase.auth().currentUser
-    thisPerson.updateProfile({
-      displayName: snapshot.eventAdmin.name
-    }). then(function(){
-
-      thisPerson = firebase.auth().currentUser
-      name = thisPerson.displayName
-      email = thisPerson.email
-   
-
-
-
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //   console.log("1")
-     
-     
-    //   email = user.email
-    //   console.log(email)
-    //   name = user.displayName
-    //   console.log(name)
-    // })
+    var email = $('#users-email').val().trim()
+    var password = $('#users-password').val().trim()
+    var name = $('#username').val().trim()
+    console.log(name)
 
     return database.ref('Guests').once('value', function (snapshot) {
-     
-   
+
+
       var temp = snapshot.val().info
       console.log('var temp came back as ' + temp)
-  
-    
+
+      console.log(name)
+      
       if (typeof temp !== 'undefined') {
-        for (var i = 0; i < snapshot.val().info.length; i++) {
-          if (snapshot.val().info[i].name = name) {
-            console.log(snapshot.val().info[i].name + ' already exists in the database!')
-          }
-        }
+        var tempLength = snapshot.val().info.length
+        database.ref('Guests/info/' + tempLength).set({
+          name,
+          email,
+          password
+        })
+
       }
-          else {
-            console.log(name + ' is being created as a new attendee!')
-            database.ref('Guests/info/' + 0).set({
-              name,
-              email
-            })
-          }
+      else {
+        console.log(name + ' is being created as a new attendee!')
+        database.ref('Guests/info/0').set({
+          name,
+          email,
+          password
+        })
+      }
     })
+
+    // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    //   // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   // [START_EXCLUDE]
+    //   if (errorCode == 'auth/weak-password') {
+    //     alert('The password is too weak.');
+    //   } else {
+    //     alert(errorMessage);
+    //   }
+    //   console.log(error);
+    //   // [END_EXCLUDE]
+    // })
+    // firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    //   // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   // [START_EXCLUDE]
+    //   if (errorCode === 'auth/wrong-password') {
+    //     alert('Wrong password.');
+    //   } else {
+    //     alert(errorMessage);
+    //   }
+    //   console.log(error);
+    //   // document.getElementById('quickstart-sign-in').disabled = false;
+    //   // [END_EXCLUDE]
+    // });
+
   })
-  }
+
+
+  //signin button function 
+  $('#signin-btn').on('click', function () {
+    if (firebase.auth().currentUser) {
+      console.log('already signed in, so we are signing the previous person out')
+      console.log(firebase.auth().signOut());
+
+    } else {
+      var email = $('#uname').val().trim()
+      var password = $('#sign-in-password').val().trim()
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // document.getElementById('quickstart-sign-in').disabled = false;
+        // [END_EXCLUDE]
+      });
+      // [END authwithemail]
+    }
+    // document.getElementById('quickstart-sign-in').disabled = true;
+
+  })
+
+
+
+
+  // function captureCurrentUserInfo(snapshot) {
+  //   console.log('inside the capture current user info function')
+  //   var name = ''
+  //   var email = ''
+  //   var thisPerson = firebase.auth().currentUser
+  //   thisPerson.updateProfile({
+  //     displayName: snapshot.eventAdmin.name
+  //   }). then(function(){
+
+  //     thisPerson = firebase.auth().currentUser
+  //     name = thisPerson.displayName
+  //     email = thisPerson.email
+
+
+
+
+  // firebase.auth().onAuthStateChanged(function (user) {
+  //   console.log("1")
+
+
+  //   email = user.email
+  //   console.log(email)
+  //   name = user.displayName
+  //   console.log(name)
+  // })
+
+  //   return database.ref('Guests').once('value', function (snapshot) {
+
+
+  //     var temp = snapshot.val().info
+  //     console.log('var temp came back as ' + temp)
+
+
+  //     if (typeof temp !== 'undefined') {
+  //       for (var i = 0; i < snapshot.val().info.length; i++) {
+  //         if (snapshot.val().info[i].name = name) {
+  //           console.log(snapshot.val().info[i].name + ' already exists in the database!')
+  //         }
+  //       }
+  //     }
+  //         else {
+  //           console.log(name + ' is being created as a new attendee!')
+  //           database.ref('Guests/info/' + 0).set({
+  //             name,
+  //             email
+  //           })
+  //         }
+  //   })
+  // })
+  // }
 
   //update the DOM with Event Plan and Host related info and MAP
   database.ref('/Host').on('value', function (snapshot) {
@@ -232,7 +314,7 @@ $('#signup-btn').on('click', function(){
 
       //if there is anyone logged in go and create a guest profile for them in Firebase
       if (firebase.auth().currentUser) {
-      captureCurrentUserInfo(snapshot.val())
+        // captureCurrentUserInfo(snapshot.val())
       }
 
       $('#party-name').text(snapshot.val().eventAdmin.eventName)
@@ -353,6 +435,25 @@ $('#signup-btn').on('click', function(){
         }
       }
     }
+
+    temp = snapshotGuests.val().info
+    console.log(temp)
+    if (typeof temp !== 'undefined') {
+      $('#attendees').empty()
+      for (var i = 0; i < snapshotGuests.val().info.length; i++) {
+          $('#attendees').append(
+            `
+            <tr>
+                <td>${snapshotGuests.val().info[i].name} </td>
+           </tr>  
+
+            `
+          )
+      }
+    }
+
+
+
   }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
   })
@@ -362,7 +463,7 @@ $('#signup-btn').on('click', function(){
 
 
 
-//Working on this function....currently not ready
+  //Working on this function....currently not ready
   $('.responsive-table-body-req').on('click', '.req-items', function () {
     var tempDataVal = $(this).data('orgitem')
     var itemNameAssignedToInfo = ''
@@ -377,27 +478,27 @@ $('#signup-btn').on('click', function(){
         database.ref('Host/eventAdmin/initialRequirement/' + tempDataVal + '/item').update({
           1: newQty
         })
-     
+
         return database.ref('Guests').once('value').then(function (snapshotGuest) {
           var newQtyGuest = snapshotGuest.val().eventGuest.initialRequirement[tempDataVal].item[1] + 1
-          
-        //   var tempName = ''
-        //   var tempEmail = ''
-        //   //Might need to use .then
-        //   firebase.auth().onAuthStateChanged(function (user) {
-        //     tempName = user.displayName
-        //     tempEmail = user.email
-        //   })
-          
-        //   temp = snapshotGuest.val().info
-        //   if (typeof temp !== 'undefined'){
-        //     for (var i =0; i < snapshotGuest.val().info.length; i++){
-        //       if (snapshotGuest.cal().info[i].name = tempName){
-        //         database.ref('Guest/info/' + i).update
-        //       }
-        //     }
 
-        //   }
+          //   var tempName = ''
+          //   var tempEmail = ''
+          //   //Might need to use .then
+          //   firebase.auth().onAuthStateChanged(function (user) {
+          //     tempName = user.displayName
+          //     tempEmail = user.email
+          //   })
+
+          //   temp = snapshotGuest.val().info
+          //   if (typeof temp !== 'undefined'){
+          //     for (var i =0; i < snapshotGuest.val().info.length; i++){
+          //       if (snapshotGuest.cal().info[i].name = tempName){
+          //         database.ref('Guest/info/' + i).update
+          //       }
+          //     }
+
+          //   }
 
 
           // var userObject = {
@@ -418,7 +519,7 @@ $('#signup-btn').on('click', function(){
         database.ref('Host/eventAdmin/amendedRequirement/' + tempDataVal).update({
           hostAddedLineItemQty: newQty
         })
-        
+
         return database.ref('Guests').once('value').then(function (snapshotGuest) {
           var newQtyGuest = snapshotGuest.val().eventGuest.amendedRequirement[tempDataVal].hostAddedLineItemQty + 1
           // var userObject = {

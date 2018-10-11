@@ -67,8 +67,15 @@ $( document ).ready(function() {
     
 $('#submit-finish-btn').on('click', function() {
     $('#modal1').modal('close');
-    console.log('its working');
-
+   
+});
+$('#signin-btn').on('click', function() {
+    $('#modal3').modal('close');
+   
+});
+$('#signup-btn').on('click', function() {
+    $('#modal2').modal('close');
+  
 });
 
 });
