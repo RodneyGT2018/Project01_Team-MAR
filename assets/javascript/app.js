@@ -20,14 +20,15 @@ function initMap() {
 $(document).ready(function () {
 
   var config = {
-    apiKey: "AIzaSyCfxrNFR0IkXIzWEPrkJVR5UX0MGrqteL0",
-    authDomain: "mikesproject-bd0c2.firebaseapp.com",
-    databaseURL: "https://mikesproject-bd0c2.firebaseio.com",
-    projectId: "mikesproject-bd0c2",
-    storageBucket: "mikesproject-bd0c2.appspot.com",
-    messagingSenderId: "911450662789"
-  };
-  firebase.initializeApp(config);
+    apiKey: "AIzaSyD9XEx6O9kjw0SuRRXcVjjC9k30l4PuxJc",
+    authDomain: "author-page.firebaseapp.com",
+    databaseURL: "https://author-page.firebaseio.com",
+    projectId: "author-page",
+    storageBucket: "author-page.appspot.com",
+    messagingSenderId: "797162172587"
+};
+
+firebase.initializeApp(config);
 
   //define global variables 
   var database = firebase.database()
@@ -122,6 +123,7 @@ $(document).ready(function () {
     database.ref('/Host').set({
       eventAdmin
     });
+  
 
     var eventGuest = {
       initialRequirement: eventAdmin.initialRequirement,
@@ -134,9 +136,9 @@ $(document).ready(function () {
 
     database.ref('/Guests').set({
       eventGuest
-
     });
   });
+
 
 
 
@@ -316,6 +318,7 @@ $(document).ready(function () {
         return database.ref('Guests').once('value').then(function (snapshotGuest) {
           var newQtyGuest = snapshotGuest.val().eventGuest.initialRequirement[tempDataVal].item[1] + 1
           
+
           // var userObject = {
           //   item: snapshotGuest.val().eventGuest.initialRequirement[tempDataVal].item[0],
           //   Qty: newQtyGuest
@@ -417,3 +420,4 @@ $(document).ready(function () {
   // });
 
 });
+
