@@ -15,7 +15,6 @@
     <!-- Firebase link -->
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
 
-
     <!-- CSS  -->
     <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -29,13 +28,10 @@
 
   </head>
 
-
 <body>
   <!-- Zone 1  -->
   <nav class="light-blue lighten-1" role="navigation">
-
     <div class="nav-wrapper container">
-
       <ul class="right hide-on-med-and-down">
         <ul id="nav-mobile" class="sidenav"></ul>
       </ul>
@@ -59,9 +55,8 @@
           </div>
           <div class="col s12 m4">
             <div class="right-align">
-              <a class="btn-halloween btn" href="#modal1">Host Sign Up</a>
               <a class="btn-halloween btn" href="#modal1">Sign Up</a>
-              <a class="btn-halloween btn" href="#modal3">Sign In</a>
+              <a class="btn-halloween btn" href="#modal1">Sign In</a>
             </div>
           </div>
         </div>
@@ -143,32 +138,7 @@
   <!-- Modal Structure -->
 
    <!-- Modal Structure User Adding Items --> 
- 
-   <div id="modal3"  class="modal row setup-content">
-    <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-      <p>Enter an email and password below and either sign in to an existing account or sign up</p>
-
-      <input class="mdl-textfield__input" style="display:inline;width:auto;" type="text" id="email" name="email" placeholder="Email"/>
-      &nbsp;&nbsp;&nbsp;
-      <input class="mdl-textfield__input" style="display:inline;width:auto;" type="password" id="password" name="password" placeholder="Password"/>
-      <br/><br/>
-      <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">Sign In</button>
-      &nbsp;&nbsp;&nbsp;
-      <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-up" name="signup">Sign Up</button>
-      &nbsp;&nbsp;&nbsp;
-      <button class="mdl-button mdl-js-button mdl-button--raised" disabled id="quickstart-verify-email" name="verify-email">Send Email Verification</button>
-      &nbsp;&nbsp;&nbsp;
-      <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">Send Password Reset Email</button>
-      <button onclick="googleSignIn()">Google SignIn</button>
-    </div>
-  </div>
- 
- 
- 
- 
- 
- 
-   <div id="modal2"  class="modal row setup-content">
+  <div id="modal2"  class="modal row setup-content">
      <div class="input-field col s6">
           <label class="control-label">Item</label>
           <input id="add-item-name"  maxlength="100" type="text" required="required"  class="form-control" placeholder="What are you bringing to the party?"  />
