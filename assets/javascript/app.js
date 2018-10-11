@@ -230,8 +230,10 @@ $('#signup-btn').on('click', function(){
       return
     } else {
 
+      //if there is anyone logged in go and create a guest profile for them in Firebase
+      if (firebase.auth().currentUser) {
       captureCurrentUserInfo(snapshot.val())
-
+      }
 
       $('#party-name').text(snapshot.val().eventAdmin.eventName)
       $('#party-date').text(snapshot.val().eventAdmin.eventDate)
