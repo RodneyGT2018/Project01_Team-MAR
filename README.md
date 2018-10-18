@@ -6,9 +6,9 @@ Project Title:
 "My Party" (Halloween Theme)
 
 Built With
-Materialize (Web Framework)
-Firebase (Database)
-Flickr (Images API)
+Materialize (Web Framework),
+Firebase (Database),
+Flickr (Images API), and 
 Google Maps (Maps API)
 
 Authors: 
