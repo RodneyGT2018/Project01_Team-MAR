@@ -4,7 +4,7 @@ Link:  https://rodneygt2018.github.io/Project01_Team-MAR
 
 
 Project Title: 
-"My Party - Halloween Theme"
+"My Party" (Halloween Theme)
 
 
 Built With:
